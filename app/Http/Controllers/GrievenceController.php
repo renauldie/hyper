@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Admin\BloodPressure;
 use App\Models\Admin\Disease;
+use App\Models\Consultation;
 
+use App\Http\Requests\GrievenceRequest;
 class GrievenceController extends Controller
 {
     /**
@@ -26,12 +29,27 @@ class GrievenceController extends Controller
      */
     public function index()
     {
-        $bloods = BloodPressure::all()->sortBy('id');
-        $diseases = Disease::all()->sortBy('id');
-        return view('pages.grievence',[
-            'bloods' => $bloods,
-            'diseases' => $diseases
+        return view('pages.grievence');
+    }
 
+    public function process(GrievenceRequest $request) {
+        $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
+        $consultation = Consultation::create($data);
+        return redirect()->route('choose-disease', $consultation->id);
+    }
+
+    public function addProcess() {
+
+    }
+
+    public function show($id) {
+        $items = Consultation::with('consultation_detail')->findOrFail($id);
+        $diseases = Disease::all()->sortBy('id');
+        
+        return \view('pages.grievence-detail', [
+            'items' => $items, 
+            'diseases' => $diseases
         ]);
     }
 }

@@ -13,59 +13,30 @@
 
 <section class="about_us padding_top">
   <div class="container">
-    <form action="#">
-      <div class="row justify-content-between align-items-center">
-        <div class="col-md-6 col-lg-6">
-          <div class="about_us_img">
-            <h3 class="mb-30">Check Your Condition</h3>
-            <div class="input-group-icon mt-10">
-              <div class="icon"><i class="fa fa-heartbeat" aria-hidden="true"></i></div>
-              <div class="form-select" id="default-select_1">
-                <select>
-                  <option value="1" selected disabled>choose your blood pressure</option>
-                  @foreach ($bloods as $blood)
-                  <option value="{{ $blood->id }}">{{ $blood->sistolic_start }} - {{ $blood->sistolic_end }} /
-                    {{ $blood->diastolic_start }} - {{ $blood->diastolic_end }}</option>
-                  @endforeach
-                </select>
-              </div>
-              <div class="mt-10">
-                <input type="text" name="ages" placeholder="{{ Auth::user()->ages }}" onfocus="this.placeholder = ''"
-                  onblur="this.placeholder = '{{ Auth::user()->ages }}'" value="{{ Auth::user()->ages }}" disabled
-                  class="single-input-primary">
-              </div>
-              <div class="mt-10">
-                <input type="text" name="first_name" placeholder="Body Weight" onfocus="this.placeholder = ''"
-                  onblur="this.placeholder = 'Body Weight'" required class="single-input-accent">
-              </div>
-            </div>
-          </div>
-          <button class="genric-btn info mt-5 radius">
-            Proceess
-          </button>
-        </div>
-        <div class="col-md-6 col-lg-6">
-          <div class="about_us_text">
-            <h3 class="mb-30">Do you have another disease?</h3>
-            <div class="single-element-widget mt-30">
-              @foreach ($diseases as $disease)
-              <div class="row">
-                <div class="col-md-6 col-lg-6 col-xl-6">
-                  <div class="switch-wrap d-flex justify-content-between mb-n4">
-                    <p>{{ $disease->name }}</p>
-                    <div class="confirm-checkbox">
-                      <input type="checkbox" id="{{ $disease->id}}">
-                      <label for="{{ $disease->id}}"></label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              @endforeach
-            </div>
-          </div>
-        </div>
+    <div class="card">
+      <div class="card-header">
+        <h4>Insert General Information</h4>
       </div>
-    </form>
+      <div class="card-body">
+        <form action="{{ route('process-consultation') }}" method="POST">
+          @csrf
+          <h6 class="card-title">Input Blood Pressure</h6>
+          <input type="number" name="blood_pressure" placeholder="Blood Pressure" min="120"
+            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Input blood pressure'" required
+            class="single-input rounded-25">
+
+          <h6 class="card-title mt-4">Input Age</h6>
+          <input type="number" name="ages" placeholder="Age" onfocus="this.placeholder = ''"
+            onblur="this.placeholder = 'Input your age'" required class="single-input">
+
+          <h6 class="card-title mt-4">Body Weight</h6>
+          <input type="number" name="body_weight" placeholder="Body Weight" onfocus="this.placeholder = ''"
+            onblur="this.placeholder = 'Input body weight'" required class="single-input">
+
+          <button type="submit" class="btn btn-primary btn-sm mt-3 float-right">Next Step</button>
+        </form>
+      </div>
+    </div>
   </div>
 </section>
 

@@ -35,6 +35,12 @@ Route::get('/', [HomeController::class, 'index'])
 Route::get('/consultation', [GrievenceController::class, 'index'])
     ->name('consultation');
 
+Route::post('/consultation/consultation-detail', [GrievenceController::class, 'process'])
+    ->name('process-consultation');
+
+Route::get('consultation/consultation-disease/{id}', [GrievenceController::class, 'show'])
+    ->name('choose-disease');
+
 Route::get('blog', [BlogController::class, 'index'])
     ->name('blog');
 

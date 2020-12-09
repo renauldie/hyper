@@ -23,8 +23,9 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="#">Profile</a>
-                  <a class="dropdown-item" href="#">Monitoring</a>
-                  <a class="dropdown-item" href="#">Record</a>
+                  <a class="dropdown-item" href="">Consultation Detail</a>
+                  <a class="dropdown-item" href="#">Consultation Record</a>
+                  <a class="dropdown-item" href="#">Monitoring Record</a>
                 </div>
               </li>
               @else

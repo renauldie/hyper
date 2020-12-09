@@ -15,9 +15,9 @@
 
       @yield('content')
 
+      @include('includes.footer-alternate')
     </div>
 
-    @include('includes.footer-alternate')
     @include('includes.script')
   </body>
 
