@@ -46,9 +46,9 @@
           <i class="fas fa-tablets"></i> <span class="nav-text">Dosage</span>
         </a>
         <ul aria-expanded="false">
-          <li><a href="./email-inbox.html">Dosage List</a></li>
-          <li><a href="./email-read.html">Ages</a></li>
+          <li><a href="{{ route('age.index') }}">Ages</a></li>
           <li><a href="./email-compose.html">Weight</a></li>
+          <li><a href="./email-inbox.html">Dosage List</a></li>
         </ul>
       </li>
 

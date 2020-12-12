@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\MedicineRuleDetailController;
 use App\Http\Controllers\Admin\BloodPressureController;
 use App\Http\Controllers\Admin\DiseaseController;
 use App\Http\Controllers\Admin\UserListController;
+use App\Http\Controllers\Admin\AgeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\GrievenceController;
@@ -60,7 +61,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 
     Route::resource('medicine-rule', MedicineRuleController::class);
 
-    Route::resource('medicine-rule-detail', MedicineRuleDetailController::class);    
+    Route::resource('medicine-rule-detail', MedicineRuleDetailController::class);
+    
+    Route::resource('age', AgeController::class);
 
 
 });
