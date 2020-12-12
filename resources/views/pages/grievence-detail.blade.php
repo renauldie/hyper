@@ -28,7 +28,7 @@
               <th>Body Weight</th>
             </thead>
             <tbody>
-              <td>{{ Auth::user()->name}}</td>
+              <td>{{ $items->user->name}}</td>
               <td>{{ $items->ages }} thn</td>
               <td>{{ $items->blood_pressure }} mmHg</td>
               <td>{{ $items->body_weight }} Kg</td>
@@ -38,8 +38,17 @@
 
         <div class="container">
           <h4 class="mt-4">Selected Disease</h4>
-          @foreach ($items->consultation_detail as $item)
-          <p>{{ $item->cosultations_id }}</p>
+          @foreach ($dets as $det)
+          <div class="row">
+            <col-md-4 class="col-lg-4">
+              <p>{{ $det->diseases->name}}</p>
+            </col-md-4>
+            <col-md-2 class="col-lg-2">
+              <button class="btn">
+                <i class="fas fa-trash"></i>
+              </button>
+            </col-md-2>
+          </div>
           @endforeach
         </div>
 
@@ -73,6 +82,10 @@
         <button type="submit" class="btn btn-primary btn-sm mt-3 float-right">Next Step</button>
       </div>
     </div>
+    <div class="card">
+
+    </div>
+  </div>
   </div>
 </section>
 

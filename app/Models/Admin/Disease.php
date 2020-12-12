@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Models\ConsultationDetail;
+
 class Disease extends Model
 {
     use softDeletes;
@@ -17,4 +19,8 @@ class Disease extends Model
 
     ];
 
+    public function consultation_detail()
+    {
+        return $this->hasMany(ConsultationDetail::class, 'diseases_id', 'id');
+    }
 }
