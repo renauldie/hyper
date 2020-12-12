@@ -47,7 +47,7 @@
         </a>
         <ul aria-expanded="false">
           <li><a href="{{ route('age.index') }}">Ages</a></li>
-          <li><a href="./email-compose.html">Weight</a></li>
+          <li><a href="{{ route('weight.index') }}">Weight</a></li>
           <li><a href="./email-inbox.html">Dosage List</a></li>
         </ul>
       </li>
