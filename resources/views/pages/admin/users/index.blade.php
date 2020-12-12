@@ -24,7 +24,6 @@
                   <th>Full Name</th>
                   <th>Email</th>
                   <th>Roles</th>
-                  <th>Password</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -33,7 +32,6 @@
                   <th>Full Name</th>
                   <th>Email</th>
                   <th>Roles</th>
-                  <th>Password</th>
                   <th>Action</th>
                 </tr>
               </tfoot>
@@ -44,7 +42,6 @@
                   <th>{{ $item -> name}}</th>
                   <th>{{ $item -> email}}</th>
                   <th>{{ $item -> roles}}</th>
-                  <th>{{ $item -> password}}</th>
                   <th>{{ $item -> name }}</th>
                 </tr>
                 @endforeach
