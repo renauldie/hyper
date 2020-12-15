@@ -64,7 +64,7 @@
         </a>
       </li>
       <li>
-        <a href="javascript:void()" aria-expanded="false">
+        <a href="#" aria-expanded="false">
           <i class="fas fa-stethoscope"></i><span class="nav-text">User Consultations</span>
         </a>
       </li>

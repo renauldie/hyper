@@ -12,6 +12,7 @@ use App\Models\Consultation;
 use App\Models\ConsultationDetail;
 
 use App\Http\Requests\GrievenceRequest;
+use App\Http\Requests\GrievenceDetailRequest;
 class GrievenceController extends Controller
 {
     /**
@@ -34,6 +35,11 @@ class GrievenceController extends Controller
         return view('pages.grievence');
     }
 
+    public function adminshow() 
+    {
+        return view('pages.admin.user-consultation.index');
+    }
+
     public function process(GrievenceRequest $request) {
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
@@ -41,8 +47,11 @@ class GrievenceController extends Controller
         return redirect()->route('choose-disease', $consultation->id);
     }
 
-    public function addProcess(Request $request) {
-
+    public function addProcess(GrievenceDetailRequest $request, $redirect) {
+        $data = $request->all();
+        ConsultationDetail::create($data);
+        return redirect()->route('choose-disease', $redirect);
+        
     }
 
     public function show($id) {

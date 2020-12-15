@@ -43,6 +43,9 @@ Route::post('/consultation/consultation-detail', [GrievenceController::class, 'p
 Route::get('consultation/consultation-disease/{id}', [GrievenceController::class, 'show'])
     ->name('choose-disease');
 
+Route::get('consultation/consultation-disease/create/{id}', [GrievenceController::class, 'addProcess'])
+    ->name('disease-add');
+
 Route::get('blog', [BlogController::class, 'index'])
     ->name('blog');
 
@@ -67,6 +70,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::resource('age', AgeController::class);
     
     Route::resource('weight', WeightController::class);
-
 
 });

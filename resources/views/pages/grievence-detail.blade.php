@@ -54,14 +54,14 @@
 
         <div class="container">
           <h4 class="mt-4">Choose aonther disease that you have</h4>
-          <form action="#" method="POST">
+          <form action={{ route('disease-add', $items->id) }} method="GET">
             @csrf
             <div class="row">
               <div class="col-md-4 col-xl-6">
                 <div class="input-group-icon mt-10">
                   <div class="icon"><i class="fas fa-disease" aria-hidden="true"></i></div>
                   <div class="form-select" id="default-select_1">
-                    <select>
+                    <select name="diseases_id">
                       @foreach ($diseases as $disease)
                       <option value="{{ $disease->id }}" selected>{{ $disease->name}}</option>
                       @endforeach
@@ -69,6 +69,7 @@
                   </div>
                 </div>
               </div>
+              <input type="text" value="{{ $items->id }}" name="cosultations_id" hidden>
 
               <div class="col-md-3 col-xl-4 mt-3">
                 <button type="submit" class="btn btn-danger btn-sm">Add this disease</button>

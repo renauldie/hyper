@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 // use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class GrievenceRequest extends FormRequest
+class GrievenceDetailRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +26,8 @@ class GrievenceRequest extends FormRequest
     {
         return [
         // 'user_id' => Auth::user()->id,
-        'blood_pressure' => 'required|integer',
-        'body_weight' => 'required|integer',
-        'ages' => 'required|integer'
+        'cosultations_id' => 'required|integer|exists:consultations,id',
+        'diseases_id' => 'required|integer|exists:diseases,id'
         ];
     }
 }
