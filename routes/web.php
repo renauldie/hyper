@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\MedicineRuleDetailController;
 use App\Http\Controllers\Admin\BloodPressureController;
 use App\Http\Controllers\Admin\DiseaseController;
 use App\Http\Controllers\Admin\UserListController;
+use App\Http\Controllers\Admin\AgeController;
+use App\Http\Controllers\Admin\WeightController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\GrievenceController;
@@ -41,6 +43,9 @@ Route::post('/consultation/consultation-detail', [GrievenceController::class, 'p
 Route::get('consultation/consultation-disease/{id}', [GrievenceController::class, 'show'])
     ->name('choose-disease');
 
+Route::get('consultation/consultation-disease/create/{id}', [GrievenceController::class, 'addProcess'])
+    ->name('disease-add');
+
 Route::get('blog', [BlogController::class, 'index'])
     ->name('blog');
 
@@ -60,7 +65,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 
     Route::resource('medicine-rule', MedicineRuleController::class);
 
-    Route::resource('medicine-rule-detail', MedicineRuleDetailController::class);    
-
+    Route::resource('medicine-rule-detail', MedicineRuleDetailController::class);
+    
+    Route::resource('age', AgeController::class);
+    
+    Route::resource('weight', WeightController::class);
 
 });

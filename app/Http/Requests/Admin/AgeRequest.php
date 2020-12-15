@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
-// use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class GrievenceRequest extends FormRequest
+class AgeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +24,8 @@ class GrievenceRequest extends FormRequest
     public function rules()
     {
         return [
-        // 'user_id' => Auth::user()->id,
-        'blood_pressure' => 'required|integer',
-        'body_weight' => 'required|integer',
-        'ages' => 'required|integer'
+        'start_age' => 'required|integer',
+        'end_age' => 'required|integer'
         ];
     }
 }
