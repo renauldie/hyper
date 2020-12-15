@@ -51,7 +51,13 @@ class GrievenceController extends Controller
         $data = $request->all();
         ConsultationDetail::create($data);
         return redirect()->route('choose-disease', $redirect);
-        
+    }
+
+    public function deleteProcess($id) {
+        $item = ConsultationDetail::findOrfail($id);
+        $item->delete();
+
+        return redirect()->route('choose-disease', $item->cosultations_id);
     }
 
     public function show($id) {

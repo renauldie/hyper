@@ -1,6 +1,6 @@
 @extends('layouts.app-sub')
 
-@section('content')
+@section('name')
 @if ($errors->any())
 <div class="alert alert-danger">
   <ul>
@@ -15,7 +15,7 @@
   <div class="container">
     <div class="card">
       <div class="card-header">
-        <h4 class="mt-4">General Hypertension Information</h4>
+        <h4 class="mt-4">Grievence Result</h4>
       </div>
       <div class="card-body container">
 
@@ -44,9 +44,9 @@
               <p>{{ $det->diseases->name}}</p>
             </col-md-4>
             <col-md-2 class="col-lg-2">
-              <a href="{{ route('disease-delete', $det->id) }}" class="btn">
+              <button class="btn">
                 <i class="fas fa-trash"></i>
-              </a>
+              </button>
             </col-md-2>
           </div>
           @endforeach
@@ -54,7 +54,7 @@
 
         <div class="container">
           <h4 class="mt-4">Choose aonther disease that you have</h4>
-          <form action={{ route('disease-add', $items->id) }} method="POST">
+          <form action={{ route('disease-add', $items->id) }} method="GET">
             @csrf
             <div class="row">
               <div class="col-md-4 col-xl-6">
@@ -89,5 +89,4 @@
   </div>
   </div>
 </section>
-
 @endsection

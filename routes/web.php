@@ -43,8 +43,11 @@ Route::post('/consultation/consultation-detail', [GrievenceController::class, 'p
 Route::get('consultation/consultation-disease/{id}', [GrievenceController::class, 'show'])
     ->name('choose-disease');
 
-Route::get('consultation/consultation-disease/create/{id}', [GrievenceController::class, 'addProcess'])
+Route::post('consultation/consultation-disease/create/{id}', [GrievenceController::class, 'addProcess'])
     ->name('disease-add');
+
+Route::get('consultation/consultation-disease/delete/{id}', [GrievenceController::class, 'deleteProcess'])
+    ->name('disease-delete');
 
 Route::get('blog', [BlogController::class, 'index'])
     ->name('blog');
