@@ -29,7 +29,4 @@ class ConsultationDetail extends Model
         return $this->belongsTo(Consultation::class, 'cosultations_id', 'id');
     }
 
-   
-    
-
 }

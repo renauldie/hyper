@@ -48,7 +48,7 @@
                     <form action="{{ route('weight.destroy', $main->id) }}" method="POST" class="d-inline">
                       @csrf
                       @method('delete')
-                      <button class="btn btn-danger btn-sm">
+                      <button class="btn btn-danger btn-sm" type="submit">
                         <i class="fa fa-trash"></i>
                       </button>
                     </form>

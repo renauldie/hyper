@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin\BloodPressure;
 use App\Models\Admin\Disease;
+use App\Models\Admin\Medicine;
 use App\Models\Consultation;
 use App\Models\ConsultationDetail;
 
@@ -51,7 +52,13 @@ class GrievenceController extends Controller
         $data = $request->all();
         ConsultationDetail::create($data);
         return redirect()->route('choose-disease', $redirect);
-        
+    }
+
+    public function deleteProcess($id) {
+        $item = ConsultationDetail::findOrfail($id);
+        $item->delete();
+
+        return redirect()->route('choose-disease', $item->cosultations_id);
     }
 
     public function show($id) {
@@ -75,5 +82,34 @@ class GrievenceController extends Controller
             'diseases' => $diseases,
             'dets' => $dets
         ]);
+    }
+
+    public function checkResult(Request $request, $id) {
+        // dd($request->disease_id);
+
+        $this->validate($request, [
+            'disease_id.*' => 'required|integer'
+        ]);
+
+        $par = $request->disease_id;
+        // dd($par);
+        $result = DB::table('medicines')
+                    ->select('medicines.medicine_name', 'medicines.find_at_pharmacy')
+                    ->join('medicine_rule_details', 'medicines.id', '=', 'medicine_rule_details.medicine_id')
+                    ->join('medicine_rules', 'medicine_rule_details.medicine_rule_id', '=', 'medicine_rules.id')
+                    ->whereIn('medicine_rule_details.disease_id', $par)
+                    ->groupBy('medicines.medicine_name', 'medicines.find_at_pharmacy')
+                    ->get();
+
+        // dd($result);
+        $items = Consultation::with([
+            'consultation_detail', 'user' 
+        ])->findOrFail($id);
+
+        return \view('pages.grievence-result', [
+            'result' => $result, 
+            'items' => $items
+        ]);
+        
     }
 }
