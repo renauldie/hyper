@@ -85,7 +85,7 @@
         </div>
         </form>
 
-        <form action="{{ route('disease-result') }}" method="POST">
+        <form action="{{ route('disease-result', $items->id) }}" method="GET">
           @csrf
           @foreach ($dets as $det)
           <div class="container row">

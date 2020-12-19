@@ -84,7 +84,7 @@ class GrievenceController extends Controller
         ]);
     }
 
-    public function checkResult(Request $request) {
+    public function checkResult(Request $request, $id) {
         // dd($request->disease_id);
 
         $this->validate($request, [
@@ -94,17 +94,21 @@ class GrievenceController extends Controller
         $par = $request->disease_id;
         // dd($par);
         $result = DB::table('medicines')
-                    ->select('medicines.medicine_name')
+                    ->select('medicines.medicine_name', 'medicines.find_at_pharmacy')
                     ->join('medicine_rule_details', 'medicines.id', '=', 'medicine_rule_details.medicine_id')
                     ->join('medicine_rules', 'medicine_rule_details.medicine_rule_id', '=', 'medicine_rules.id')
                     ->whereIn('medicine_rule_details.disease_id', $par)
-                    ->groupBy('medicines.medicine_name')
+                    ->groupBy('medicines.medicine_name', 'medicines.find_at_pharmacy')
                     ->get();
 
         // dd($result);
+        $items = Consultation::with([
+            'consultation_detail', 'user' 
+        ])->findOrFail($id);
 
         return \view('pages.grievence-result', [
-            'result' => $result
+            'result' => $result, 
+            'items' => $items
         ]);
         
     }
