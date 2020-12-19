@@ -37,19 +37,26 @@
         </div>
 
         <div class="container">
-          <h4 class="mt-4">Selected Disease</h4>
-          @foreach ($dets as $det)
           <div class="row">
-            <col-md-4 class="col-lg-4">
-              <p>{{ $det->diseases->name}}</p>
-            </col-md-4>
-            <col-md-2 class="col-lg-2">
-              <a href="{{ route('disease-delete', $det->id) }}" class="btn">
-                <i class="fas fa-trash"></i>
-              </a>
-            </col-md-2>
+            <div class="col-md-6 col-xl-6">
+              <h4 class="mt-4">Selected Disease</h4>
+              @foreach ($dets as $det)
+              <div class="row">
+                <col-md-4 class="col-lg-10">
+                  <p>{{ $det->diseases->name}}</p>
+                </col-md-4>
+                <col-md-2 class="col-lg-2">
+                  <a href="{{ route('disease-delete', $det->id) }}" class="btn">
+                    <i class="fas fa-trash"></i>
+                  </a>
+                </col-md-2>
+              </div>
+              @endforeach
+            </div>
+
+            <div class="col-md-6 col-xl-6">
+            </div>
           </div>
-          @endforeach
         </div>
 
         <div class="container">
@@ -78,9 +85,24 @@
         </div>
         </form>
 
+        <form action="{{ route('disease-result') }}" method="POST">
+          @csrf
+          @foreach ($dets as $det)
+          <div class="container row">
+            <col-md-4 class="col-lg-10">
+              <input type="number" name="disease_id[]" value="{{ $det->diseases->id }}" readonly>
+            </col-md-4>
+          </div>
+          @endforeach
 
+          <div class="container-fluid col-6 text-center mb-4">
+            <button type="submit" class="btn btn-block btn-primary btn-sm mt-5">Check Now !</button>
+          </div>
+        </form>
 
-        <button type="submit" class="btn btn-primary btn-sm mt-3 float-right">Next Step</button>
+        <div class="container">
+          <h4 class="mt-5">Result Chek</h4>
+        </div>
       </div>
     </div>
     <div class="card">

@@ -21,4 +21,9 @@ class Medicine extends Model
     public function medicine_galleries(){
         return $this->hasMany(MedicineGallery::class, 'medicines_id', 'id');
     }
+
+    public function medicine_rule_detail()
+    {
+        return $this->hasMany( MedicineRuleDetail::class , 'medicine_id', 'id');
+    }
 }
