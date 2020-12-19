@@ -114,8 +114,14 @@ class GrievenceController extends Controller
     }
 
     public function record($id) {
-        $items = Consultation::all()->findOrFail($id);
+        // \dd($items);
+        $items = Consultation::with([
+            'user'
+        ])->where('user_id', $id)->get();
 
-        
+    return view('pages.grievence-record', [
+        'items' =>$items
+    ]);
+
     }
 }

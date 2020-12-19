@@ -42,7 +42,7 @@
       </div>
       <div class="card-body container">
         <h4 class="mt-2">Medicine</h4>
-        <div class="table-responsive text-center">
+        <div class="table-responsive text-center p-5">
           <table class="table" style="border: none;">
             <thead>
               <th>Medicine Name</th>
@@ -60,6 +60,10 @@
             </tbody>
           </table>
         </div>
+      </div>
+
+      <div class="card-body container">
+        <h4 class="mt-2">Medicine Dosage</h4>
       </div>
     </div>
   </div>
