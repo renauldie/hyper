@@ -31,6 +31,7 @@ use App\Http\Controllers\GrievenceController;
 
 Auth::routes();
 
+// Consultation 
 Route::get('/', [HomeController::class, 'index'])
     ->name('home');
 
@@ -52,6 +53,9 @@ Route::get('consultation/consultation-disease/delete/{id}', [GrievenceController
 Route::get('consultation/consultation-disease/check/{id}', [GrievenceController::class, 'checkResult'])
     ->name('disease-result');
 
+Route::get('consultation-record/{id}', [GrievenceController::class, 'record'])
+    ->name('consultation-record');
+// Obat gallery
 Route::get('blog', [BlogController::class, 'index'])
     ->name('blog');
 

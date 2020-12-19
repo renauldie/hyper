@@ -112,4 +112,10 @@ class GrievenceController extends Controller
         ]);
         
     }
+
+    public function record($id) {
+        $items = Consultation::all()->findOrFail($id);
+
+        
+    }
 }
