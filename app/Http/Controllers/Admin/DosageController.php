@@ -71,7 +71,10 @@ class DosageController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Dosage::findOrFail($id);
+        return \view('pages.admin.dosage-list.edit', [
+            'item' => $item
+        ]);
     }
 
     /**
@@ -83,7 +86,13 @@ class DosageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        
+        $item = Dosage::findOrFail($id);
+        $item->update($data);
+
+        return \redirect()->route('dosage-list.index');
+
     }
 
     /**

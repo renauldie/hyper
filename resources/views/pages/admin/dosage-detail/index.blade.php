@@ -52,7 +52,7 @@
                     <a href="{{ route('dosage-detail.edit', $main->id) }}" class="btn btn-info btn-sm">
                       <i class="icon-note menu-icon"></i>
                     </a>
-                    <form action="{{ route('dosage-list.destroy', $main->id) }}" method="POST" class="d-inline">
+                    <form action="{{ route('dosage-detail.destroy', $main->id) }}" method="POST" class="d-inline">
                       @csrf
                       @method('delete')
                       <button class="btn btn-danger btn-sm">
