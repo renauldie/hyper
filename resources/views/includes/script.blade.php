@@ -14,3 +14,9 @@
 <script src="{{ url('frontend/js/contact.js')}}"></script>
 <!-- custom js -->
 <script src="{{ url('frontend/js/custom.js')}}"></script>
+
+<script>
+  $('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+  })
+</script>

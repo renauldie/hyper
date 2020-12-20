@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Http\Requests\Admin\MedicineRequest;
-use App\Models\Admin\Medicine;
-use App\Models\Admin\MedicineGallery;
-use App\Models\Admin\ MedicineRuleDetail;
+use App\Models\Admin\DosageDetail;
+use App\Models\Admin\Dosage;
+use App\Models\Admin\Age;
+use App\Models\Admin\Weight;
 
-class MedicineController extends Controller
+use App\Http\Requests\Admin\DosageDetailRequest;
+
+class DosageDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,10 +21,14 @@ class MedicineController extends Controller
      */
     public function index()
     {
-        $items = Medicine::all()->sortBy('id');
-        return \view('pages.admin.medicine.index',[
+
+        $items = DosageDetail::with([
+            'dosage', 'age', 'weight'
+        ])->get();
+        return \view('pages.admin.dosage-detail.index',[
             'items' => $items
         ]);
+
     }
 
     /**
@@ -32,7 +38,14 @@ class MedicineController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.medicine.create');
+        $dosages = Dosage::all();
+        $ages = Age::all();
+        $weights = Weight::all();
+        return \view('pages.admin.dosage-detail.create', [
+            'dosages' => $dosages,
+            'ages' => $ages,
+            'weights' => $weights
+        ]);
     }
 
     /**
@@ -41,13 +54,13 @@ class MedicineController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MedicineRequest $request)
+    public function store(DosageDetailRequest $request)
     {
         $data = $request->all();
         
-        Medicine::create($data);
+        DosageDetail::create($data);
 
-        return \redirect() -> route('medicine.index');
+        return \redirect()->route('dosage-detail.index');
     }
 
     /**
@@ -69,9 +82,18 @@ class MedicineController extends Controller
      */
     public function edit($id)
     {
-        $item = Medicine::findOrFail($id);
-        return \view('pages.admin.medicine.edit', [
-            'item' => $item
+        $item = DosageDetail::with([
+            'dosage', 'age', 'weight'
+        ])->findOrFail($id);
+
+        $dosages = Dosage::all();
+        $ages = Age::all();
+        $weights = Weight::all();
+        return \view('pages.admin.dosage-detail.edit', [
+            'item' => $item,
+            'dosages' => $dosages,
+            'ages' => $ages,
+            'weights' => $weights
         ]);
     }
 
@@ -82,14 +104,14 @@ class MedicineController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(MedicineRequest $request, $id)
+    public function update(DosageDetailRequest $request, $id)
     {
         $data = $request->all();
 
-        $item = Medicine::findOrFail($id);
+        $item = DosageDetail::findOrFail($id);
         $item->update($data);
 
-        return \redirect() -> route('medicine.index');
+        return \redirect()->route('dosage-detail.index');
     }
 
     /**
@@ -100,12 +122,6 @@ class MedicineController extends Controller
      */
     public function destroy($id)
     {
-        $item = Medicine::findOrFail($id);
-        MedicineGallery::where('medicines_id', $id)->delete();
-        MedicineRuleDetail::where('medicine_rule_id', $id)->delete();
-        $item->delete();
-
-        return \redirect()->route('medicine.index');
 
     }
 }

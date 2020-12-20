@@ -90,7 +90,7 @@
           @foreach ($dets as $det)
           <div class="container row">
             <col-md-4 class="col-lg-10">
-              <input type="number" name="disease_id[]" value="{{ $det->diseases->id }}" readonly>
+              <input type="number" name="disease_id[]" value="{{ $det->diseases->id }}" readonly hidden>
             </col-md-4>
           </div>
           @endforeach
@@ -99,10 +99,6 @@
             <button type="submit" class="btn btn-block btn-primary btn-sm mt-5">Check Now !</button>
           </div>
         </form>
-
-        <div class="container">
-          <h4 class="mt-5">Result Chek</h4>
-        </div>
       </div>
     </div>
     <div class="card">
