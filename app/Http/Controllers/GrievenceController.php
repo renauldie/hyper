@@ -116,10 +116,14 @@ class GrievenceController extends Controller
     public function record($id) {
         // \dd($items);
         $items = Consultation::with([
-            'user'
+            'user', 'consultation_detail'
         ])->where('user_id', $id)->get();
 
-    return view('pages.grievence-record', [
+        // $detail = Consultation::with([
+        //     'consultation_detail'
+        // ])->where('consultation');
+
+    return view('pages.record.grievence-record', [
         'items' =>$items
     ]);
 
