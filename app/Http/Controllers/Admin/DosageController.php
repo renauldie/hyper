@@ -5,12 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Http\Requests\Admin\MedicineRequest;
-use App\Models\Admin\Medicine;
-use App\Models\Admin\MedicineGallery;
-use App\Models\Admin\ MedicineRuleDetail;
+use App\Models\Admin\Dosage;
 
-class MedicineController extends Controller
+use App\Http\Requests\Admin\DosageRequest;
+
+class DosageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,10 +18,13 @@ class MedicineController extends Controller
      */
     public function index()
     {
-        $items = Medicine::all()->sortBy('id');
-        return \view('pages.admin.medicine.index',[
+        $items = Dosage::all();
+
+        return \view('pages.admin.dosage-list.index', [
             'items' => $items
         ]);
+
+        // \dd($items);
     }
 
     /**
@@ -32,7 +34,7 @@ class MedicineController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.medicine.create');
+        return \view('pages.admin.dosage-list.create');
     }
 
     /**
@@ -41,13 +43,13 @@ class MedicineController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MedicineRequest $request)
+    public function store(DosageRequest $request)
     {
         $data = $request->all();
         
-        Medicine::create($data);
+        Dosage::create($data);
 
-        return \redirect() -> route('medicine.index');
+        return \redirect()->route('dosage-list.index');
     }
 
     /**
@@ -69,10 +71,7 @@ class MedicineController extends Controller
      */
     public function edit($id)
     {
-        $item = Medicine::findOrFail($id);
-        return \view('pages.admin.medicine.edit', [
-            'item' => $item
-        ]);
+        //
     }
 
     /**
@@ -82,14 +81,9 @@ class MedicineController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(MedicineRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $data = $request->all();
-
-        $item = Medicine::findOrFail($id);
-        $item->update($data);
-
-        return \redirect() -> route('medicine.index');
+        //
     }
 
     /**
@@ -100,12 +94,9 @@ class MedicineController extends Controller
      */
     public function destroy($id)
     {
-        $item = Medicine::findOrFail($id);
-        MedicineGallery::where('medicines_id', $id)->delete();
-        MedicineRuleDetail::where('medicine_rule_id', $id)->delete();
+        $item = Dosage::findOrFail($id);
         $item->delete();
 
-        return \redirect()->route('medicine.index');
-
+        return \redirect()->route('dosage-list.index');
     }
 }
