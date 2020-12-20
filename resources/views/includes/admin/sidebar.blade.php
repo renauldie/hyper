@@ -49,7 +49,7 @@
           <li><a href="{{ route('age.index') }}">Ages</a></li>
           <li><a href="{{ route('weight.index') }}">Weight</a></li>
           <li><a href="{{ route('dosage-list.index') }}">Dosage Rule</a></li>
-          <li><a href="{{ route('dosage-list.index') }}">Dosage Rule Detail</a></li>
+          <li><a href="{{ route('dosage-detail.index') }}">Dosage Rule Detail</a></li>
         </ul>
       </li>
 
