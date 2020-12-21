@@ -11,10 +11,15 @@ class Dosage extends Model
     use softDeletes;
     
     protected $fillable = [
-        'dosage_rule', 'dosage'
+        'dosage_rule', 'dosage' , 'medicine_id'
     ];
 
     protected $hidden = [
 
     ];
+
+    public function medicine()
+    {
+        return $this->belongsTo(Medicine::class, 'medicine_id', 'id');
+    }
 }

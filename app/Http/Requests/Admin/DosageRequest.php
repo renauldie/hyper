@@ -25,7 +25,8 @@ class DosageRequest extends FormRequest
     {
         return [
         'dosage_rule' => 'required|string',
-        'dosage' => 'required|integer'
+        'dosage' => 'required|integer',
+        'medicine_id' => 'required|integer'
         ];
     }
 }

@@ -49,6 +49,7 @@
                   @endforeach
                 </select>
               </div>
+
               <div class="form-group col-xl-6 col-md-6">
                 <select name="weights_id" id="" class="form-control">
                   <option value="#" disabled selected>choose Weight</option>

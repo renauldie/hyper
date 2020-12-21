@@ -37,6 +37,16 @@
             </div>
 
             <div class="form-group">
+              <label for="medicine_rule_id" class="font-weight-bold">Choose Medicine</label>
+              <select name="medicine_id" id="" class="form-control">
+                <option value="#" disabled selected>Choose Medicine</option>
+                @foreach ($medicines as $medicine)
+                <option name="medicine_id" value="{{ $medicine->id }}">{{ $medicine->medicine_name }}</option>
+                @endforeach
+              </select>
+            </div>
+
+            <div class="form-group">
               <label for="medicine_rule_id" class="font-weight-bold">Dosage</label>
               <input type="number" class="form-control input-default" placeholder="Input dosage" name="dosage" required>
             </div>

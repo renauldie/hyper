@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Admin\Dosage;
+use App\Models\Admin\Medicine;
 
 use App\Http\Requests\Admin\DosageRequest;
 
@@ -18,7 +19,9 @@ class DosageController extends Controller
      */
     public function index()
     {
-        $items = Dosage::all();
+        $items = Dosage::with([
+            'medicine'
+        ])->get();
 
         return \view('pages.admin.dosage-list.index', [
             'items' => $items
@@ -34,7 +37,10 @@ class DosageController extends Controller
      */
     public function create()
     {
-        return \view('pages.admin.dosage-list.create');
+        $medicines = Medicine::all();
+        return \view('pages.admin.dosage-list.create', [
+            'medicines' => $medicines
+        ]);
     }
 
     /**
