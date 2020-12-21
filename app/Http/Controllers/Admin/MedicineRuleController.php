@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Admin\MedicineRuleRequest;
 
 use App\Models\Admin\Disease;
+use App\Models\Admin\Medicine;
 use App\Models\Admin\MedicineRule;
 use App\Models\Admin\MedicineRuleDetail;
 
@@ -20,7 +21,9 @@ class MedicineRuleController extends Controller
      */
     public function index()
     {
-        $items = MedicineRule::all();
+        $items = MedicineRule::with([
+            'medicine'
+        ])->get();
         
         return \view('pages.admin.medicine-rule.index', [
             'items' => $items
@@ -34,7 +37,10 @@ class MedicineRuleController extends Controller
      */
     public function create()
     {
-        return \view('pages.admin.medicine-rule.create');
+        $medicines = Medicine::all();
+        return \view('pages.admin.medicine-rule.create',[
+            'medicines' => $medicines
+        ]);
     }
 
     /**
@@ -70,9 +76,13 @@ class MedicineRuleController extends Controller
      */
     public function edit($id)
     {
-        $item = MedicineRule::findOrFail($id);
+        $item = MedicineRule::with([
+            'medicine'
+        ])->findOrFail($id);
+        $medicines = Medicine::all();
         return \view('pages.admin.medicine-rule.edit', [
-            'item' => $item
+            'item' => $item,
+            'medicines' => $medicines
         ]);
     }
 

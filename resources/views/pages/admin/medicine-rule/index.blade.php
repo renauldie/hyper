@@ -27,6 +27,7 @@
                   <th>No</th>
                   <th>Medicine Rule</th>
                   <th>Description</th>
+                  <th>Medicine</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -35,6 +36,7 @@
                   <th>No</th>
                   <th>Medicine Name</th>
                   <th>Description</th>
+                  <th>Medicine</th>
                   <th>Action</th>
                 </tr>
               </tfoot>
@@ -45,6 +47,7 @@
                   <td style="width: 50px">{{ ++$item }}</td>
                   <td>{{ $main->name }}</td>
                   <td>{{ $main->description }}</td>
+                  <td>{{ $main->medicine->medicine_name }}</td>
                   <td style="width: 150px">
                     <a href="{{ route('medicine-rule.edit', $main->id) }}" class="btn btn-info btn-sm">
                       <i class="icon-note menu-icon"></i>
