@@ -79,7 +79,12 @@ class MedicineRuleDetailController extends Controller
      */
     public function edit($id)
     {
-        return \view('pages.admin.medicine-rule-detail.edit');
+        $item = MedicineRuleDetail::with(['medicine_rule', 'disease_rule'])->findOrFail($id);
+        $diseases = Disease::all();
+        return \view('pages.admin.medicine-rule-detail.edit', [
+            'item'=>$item,
+            'diseases' => $diseases
+        ]);
     }
 
     /**
@@ -91,7 +96,12 @@ class MedicineRuleDetailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $item = MedicineRuleDetail::findOrFail($id);
+        $item -> update($data);
+
+        return \redirect()->route('medicine-rule-detail.index');
     }
 
     /**
