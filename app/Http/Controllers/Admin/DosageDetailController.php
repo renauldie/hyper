@@ -122,6 +122,9 @@ class DosageDetailController extends Controller
      */
     public function destroy($id)
     {
+        $item = DosageDetail::findOrFail($id);
+        $item->delete();
 
+        return \redirect()->route('dosage-detail.index');
     }
 }

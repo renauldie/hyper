@@ -23,7 +23,7 @@ class MedicineRuleDetailController extends Controller
     public function index()
     {
         $items = MedicineRuleDetail::with([
-            'medicine_rule', 'disease_rule', 'medicine_list'
+            'medicine_rule', 'disease_rule'
         ])->get();
         
         return \view('pages.admin.medicine-rule-detail.index', [
@@ -40,11 +40,9 @@ class MedicineRuleDetailController extends Controller
     {
         $rules = MedicineRule::all();
         $diseases = Disease::all();
-        $medicines = Medicine::all();
         return \view('pages.admin.medicine-rule-detail.create', [
             'rules' => $rules,
-            'diseases' => $diseases,
-            'medicines' => $medicines
+            'diseases' => $diseases
         ]);
     }
 
@@ -81,7 +79,12 @@ class MedicineRuleDetailController extends Controller
      */
     public function edit($id)
     {
-        return \view('pages.admin.medicine-rule-detail.edit');
+        $item = MedicineRuleDetail::with(['medicine_rule', 'disease_rule'])->findOrFail($id);
+        $diseases = Disease::all();
+        return \view('pages.admin.medicine-rule-detail.edit', [
+            'item'=>$item,
+            'diseases' => $diseases
+        ]);
     }
 
     /**
@@ -93,7 +96,12 @@ class MedicineRuleDetailController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $item = MedicineRuleDetail::findOrFail($id);
+        $item -> update($data);
+
+        return \redirect()->route('medicine-rule-detail.index');
     }
 
     /**
@@ -104,6 +112,9 @@ class MedicineRuleDetailController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = MedicineRuleDetail::findOrFail($id);
+        $item->delete();
+
+        return \redirect()->route('medicine-rule-detail.index');
     }
 }

@@ -35,17 +35,7 @@
               <select name="medicine_rule_id" id="" class="form-control">
                 <option value="#" disabled selected>choose 1</option>
                 @foreach ($rules as $rule)
-                <option value="{{ $rule->id }}">{{ $rule->name }}</option>
-                @endforeach
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="medicine_id" class="font-weight-bold">Medicine Name</label>
-              <select name="medicine_id" id="" class="form-control">
-                <option value="#" disabled selected>choose 1</option>
-                @foreach ($medicines as $medicine)
-                <option value="{{ $medicine->id }}">{{ $medicine->medicine_name }} {{ $medicine->id }}</option>
+                <option value="{{ $rule->id }}">{{ $rule->name }} - {{ $rule->description }}</option>
                 @endforeach
               </select>
             </div>
@@ -55,7 +45,7 @@
               <select name="disease_id" id="" class="form-control">
                 <option value="#" disabled selected>choose 1</option>
                 @foreach ($diseases as $disease)
-                <option value="{{ $disease->id }}">{{ $disease->name }} {{ $disease->id }}</option>
+                <option value="{{ $disease->id }}">{{ $disease->name }}</option>
                 @endforeach
               </select>
             </div>

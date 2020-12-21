@@ -36,6 +36,16 @@
             </div>
 
             <div class="form-group">
+              <label for="medicine_id" class="font-weight-bold">Medicine</label>
+              <select name="medicine_id" id="" class="form-control">
+                <option value="#" selected>choose 1</option>
+                @foreach ($medicines as $medicine)
+                <option value="{{ $medicine->id }}">{{ $medicine->medicine_name }}</option>
+                @endforeach
+              </select>
+            </div>
+
+            <div class="form-group">
               <label for="" class="font-weight-bold">Description</label>
               <textarea class="form-control h-150px" rows="6" id="description" name="description"
                 placeholder="Input Description" required></textarea>

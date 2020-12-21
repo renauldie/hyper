@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Medicine extends Model
 {
     use softDeletes;
+    
     protected $fillable = [
         'medicine_name', 'description', 'max_usage',
         'find_at_pharmacy'
@@ -26,4 +27,17 @@ class Medicine extends Model
     {
         return $this->hasMany( MedicineRuleDetail::class , 'medicine_id', 'id');
     }
+
+    public function grievence()
+    {
+        return $this->hasManyThrough( 
+            MedicineRule::class, 
+            MedicineRuleDetail::class, 
+            'medicine_id', 
+            'medicine_rule_id', 
+            'id', 
+            'id'
+        );
+    }
+
 }

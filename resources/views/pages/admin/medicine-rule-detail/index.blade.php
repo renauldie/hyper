@@ -27,7 +27,6 @@
                   <th>No</th>
                   <th>Medicine Rule</th>
                   <th>Diesases</th>
-                  <th>Medicines</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -36,7 +35,6 @@
                   <th>No</th>
                   <th>Medicine Name</th>
                   <th>Diesases</th>
-                  <th>Medicines</th>
                   <th>Action</th>
                 </tr>
               </tfoot>
@@ -47,7 +45,6 @@
                   <td>{{ ++$item }}</td>
                   <td>{{ $main->medicine_rule->name }}</td>
                   <td>{{ $main->disease_rule->name }}</td>
-                  <td>{{ $main->medicine_list->medicine_name }}</td>
                   <td style="width: 150px">
                     <a href="{{ route('medicine-rule-detail.edit', $main->id) }}" class="btn btn-info btn-sm">
                       <i class="icon-note menu-icon"></i>
