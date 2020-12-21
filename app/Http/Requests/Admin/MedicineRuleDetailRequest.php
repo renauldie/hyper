@@ -26,7 +26,6 @@ class MedicineRuleDetailRequest extends FormRequest
         return [
         'medicine_rule_id' => 'required|integer',
         'disease_id' => 'required|integer', 
-        'medicine_id' => 'required|integer', 
         ];
     }
 }

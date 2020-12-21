@@ -23,7 +23,7 @@ class MedicineRuleDetailController extends Controller
     public function index()
     {
         $items = MedicineRuleDetail::with([
-            'medicine_rule', 'disease_rule', 'medicine_list'
+            'medicine_rule', 'disease_rule'
         ])->get();
         
         return \view('pages.admin.medicine-rule-detail.index', [
@@ -40,11 +40,9 @@ class MedicineRuleDetailController extends Controller
     {
         $rules = MedicineRule::all();
         $diseases = Disease::all();
-        $medicines = Medicine::all();
         return \view('pages.admin.medicine-rule-detail.create', [
             'rules' => $rules,
-            'diseases' => $diseases,
-            'medicines' => $medicines
+            'diseases' => $diseases
         ]);
     }
 
@@ -104,6 +102,9 @@ class MedicineRuleDetailController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = MedicineRuleDetail::findOrFail($id);
+        $item->delete();
+
+        return \redirect()->route('medicine-rule-detail.index');
     }
 }

@@ -4,13 +4,15 @@ namespace App\Models\Admin;
 
 // use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MedicineRuleDetail extends Model
 {
     // use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
-        'medicine_rule_id', 'disease_id', 'medicine_id'
+        'medicine_rule_id', 'disease_id'
     ];
 
     protected $hidden = [
@@ -25,10 +27,5 @@ class MedicineRuleDetail extends Model
     public function disease_rule()
     {
         return $this->belongsTo(Disease::class, 'disease_id', 'id');
-    }
-
-    public function medicine_list()
-    {
-        return $this->belongsTo(Medicine::class, 'medicine_id', 'id');
     }
 }

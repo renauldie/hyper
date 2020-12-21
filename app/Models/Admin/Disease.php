@@ -11,6 +11,7 @@ use App\Models\ConsultationDetail;
 class Disease extends Model
 {
     use softDeletes;
+    
     protected $fillable = [
         'name', 'alias', 'description', 'slug'
     ];

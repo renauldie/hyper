@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Medicine extends Model
 {
     use softDeletes;
+    
     protected $fillable = [
         'medicine_name', 'description', 'max_usage',
         'find_at_pharmacy'
