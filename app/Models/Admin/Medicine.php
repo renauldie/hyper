@@ -27,4 +27,17 @@ class Medicine extends Model
     {
         return $this->hasMany( MedicineRuleDetail::class , 'medicine_id', 'id');
     }
+
+    public function grievence()
+    {
+        return $this->hasManyThrough( 
+            MedicineRule::class, 
+            MedicineRuleDetail::class, 
+            'medicine_id', 
+            'medicine_rule_id', 
+            'id', 
+            'id'
+        );
+    }
+
 }
