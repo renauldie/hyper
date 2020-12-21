@@ -24,9 +24,10 @@
             <table class="table table-striped table-bordered zero-configuration">
               <thead>
                 <tr>
-                  <th>No</th>
+                  <th style="width: 50px">No</th>
                   <th>Dosage Rule</th>
                   <th>Dosage</th>
+                  <th>Medicine</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -35,6 +36,7 @@
                   <th>No</th>
                   <th>Dosage Rule</th>
                   <th>Dosage</th>
+                  <th>Medicine</th>
                   <th>Action</th>
                 </tr>
               </tfoot>
@@ -45,6 +47,7 @@
                   <td>{{ ++$item }}</td>
                   <td>{{ $main->dosage_rule }}</td>
                   <td>{{ $main->dosage }} Mg</td>
+                  <td>{{ $main->medicine->medicine_name }}</td>
                   <td>
                     <a href="{{ route('dosage-list.edit', $main->id) }}" class="btn btn-info btn-sm">
                       <i class="icon-note menu-icon"></i>

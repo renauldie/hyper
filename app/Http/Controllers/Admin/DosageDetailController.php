@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Admin\DosageDetail;
+use App\Models\Admin\BloodPressure;
 use App\Models\Admin\Dosage;
 use App\Models\Admin\Age;
 use App\Models\Admin\Weight;
@@ -23,7 +24,7 @@ class DosageDetailController extends Controller
     {
 
         $items = DosageDetail::with([
-            'dosage', 'age', 'weight'
+            'dosage', 'age', 'weight', 'b_pressure'
         ])->get();
         return \view('pages.admin.dosage-detail.index',[
             'items' => $items
@@ -41,10 +42,12 @@ class DosageDetailController extends Controller
         $dosages = Dosage::all();
         $ages = Age::all();
         $weights = Weight::all();
+        $pressures = BloodPressure::all();
         return \view('pages.admin.dosage-detail.create', [
             'dosages' => $dosages,
             'ages' => $ages,
-            'weights' => $weights
+            'weights' => $weights,
+            'pressures' => $pressures
         ]);
     }
 

@@ -40,15 +40,26 @@
               </select>
             </div>
 
+            <div class="form-group">
+              <select name="blood_pressure_id" id="" class="form-control">
+                <option value="#" disabled selected>Choose Blood Pressure</option>
+                @foreach ($pressures as $pressure)
+                <option name="blood_pressure_id" value="{{ $pressure->id }}">{{ $pressure->sistolic_start }} -
+                  {{ $pressure->sistolic_end }}</option>
+                @endforeach
+              </select>
+            </div>
+
             <div class="row">
               <div class="form-group col-xl-6 col-md-6">
                 <select name="ages_id" id="" class="form-control">
-                  <option value="#" disabled selected>choose Age</option>
+                  <option value="#" disabled selected>Choose Age</option>
                   @foreach ($ages as $age)
                   <option name="ages_id" value="{{ $age->id }}">{{ $age->start_age }} - {{ $age->end_age }}</option>
                   @endforeach
                 </select>
               </div>
+
               <div class="form-group col-xl-6 col-md-6">
                 <select name="weights_id" id="" class="form-control">
                   <option value="#" disabled selected>choose Weight</option>

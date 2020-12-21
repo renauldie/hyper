@@ -11,7 +11,7 @@ class DosageDetail extends Model
     use softDeletes;
     
     protected $fillable = [
-        'dosages_id', 'ages_id', 'weights_id'
+        'dosages_id', 'ages_id', 'weights_id', 'blood_pressure_id'
     ];
 
     protected $hidden = [
@@ -31,5 +31,10 @@ class DosageDetail extends Model
     public function weight()
     {
         return $this->belongsTo(Weight::class, 'weights_id', 'id');
+    }
+
+    public function b_pressure()
+    {
+        return $this->belongsTo( BloodPressure::class, 'blood_pressure_id', 'id');
     }
 }

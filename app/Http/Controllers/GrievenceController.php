@@ -106,7 +106,11 @@ class GrievenceController extends Controller
             'consultation_detail', 'user' 
         ])->findOrFail($id);
 
-        \dd($items['blood_pressure']);
+        $age = $items['ages'];
+        $b_pressure = $items['blood_pressure'];
+        $b_weight = $items['body_weight'];
+
+        \dd($items, $age, $b_pressure, $b_weight);
 
         return \view('pages.grievence-result', [
             'result' => $result, 

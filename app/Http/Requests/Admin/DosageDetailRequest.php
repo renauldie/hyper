@@ -26,7 +26,8 @@ class DosageDetailRequest extends FormRequest
         return [
         'dosages_id' => 'required|integer',
         'ages_id' => 'required|integer',
-        'weights_id' => 'required|integer'
+        'weights_id' => 'required|integer',
+        'blood_pressure_id' => 'required|integer'
         ];
     }
 }
