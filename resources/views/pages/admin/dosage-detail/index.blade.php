@@ -26,6 +26,7 @@
                 <tr>
                   <th>No</th>
                   <th>Dosage Rule</th>
+                  <th>Blood Pressure</th>
                   <th>Ages</th>
                   <th>Weight</th>
                   <th>Action</th>
@@ -35,6 +36,7 @@
                 <tr>
                   <th>No</th>
                   <th>Dosage Rule</th>
+                  <th>Blood Pressure</th>
                   <th>Ages</th>
                   <th>Weight</th>
                   <th>Action</th>
@@ -46,8 +48,9 @@
                 <tr>
                   <td style="width: 50px">{{ ++$item }}</td>
                   <td>{{ $main->dosage->dosage_rule }}</td>
+                  <td>{{ $main->b_pressure->sistolic_start }} - {{ $main->b_pressure->sistolic_end }}</td>
                   <td>{{ $main->age->start_age }} - {{ $main->age->end_age }} </td>
-                  <td>{{ $main->weight->start_weight }} - {{ $main->weight->end_weight }} </td>
+                  <td>{{ $main->weight->start_weight }} - {{ $main->weight->end_weight }}</td>
                   <td>
                     <a href="{{ route('dosage-detail.edit', $main->id) }}" class="btn btn-info btn-sm">
                       <i class="icon-note menu-icon"></i>
