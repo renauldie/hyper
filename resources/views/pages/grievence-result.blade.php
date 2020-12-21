@@ -13,8 +13,8 @@
 <section class="about_us padding_top">
   <div class="container">
     <div class="card">
-      <div class="card-header">
-        <h4 class="mt-4">Grievence Result</h4>
+      <div class="card-header text-center">
+        <h3 class="mt-4">Grievence Result</h3>
       </div>
 
       <div class="container">
