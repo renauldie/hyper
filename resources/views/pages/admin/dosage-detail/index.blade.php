@@ -44,7 +44,7 @@
               <tbody>
                 @foreach ($items as $item => $main)
                 <tr>
-                  <td>{{ ++$item }}</td>
+                  <td style="width: 50px">{{ ++$item }}</td>
                   <td>{{ $main->dosage->dosage_rule }}</td>
                   <td>{{ $main->age->start_age }} - {{ $main->age->end_age }} </td>
                   <td>{{ $main->weight->start_weight }} - {{ $main->weight->end_weight }} </td>

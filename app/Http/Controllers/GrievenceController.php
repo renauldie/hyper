@@ -106,7 +106,7 @@ class GrievenceController extends Controller
             'consultation_detail', 'user' 
         ])->findOrFail($id);
 
-        \dd($items['blood_pressure']);
+        \dd($items);
 
         return \view('pages.grievence-result', [
             'result' => $result, 

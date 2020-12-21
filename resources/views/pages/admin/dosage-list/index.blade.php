@@ -24,7 +24,7 @@
             <table class="table table-striped table-bordered zero-configuration">
               <thead>
                 <tr>
-                  <th>No</th>
+                  <th style="width: 50px">No</th>
                   <th>Dosage Rule</th>
                   <th>Dosage</th>
                   <th>Action</th>
