@@ -86,22 +86,6 @@ class GrievenceController extends Controller
 
     public function checkResult(Request $request, $id) {
         // dd($request->disease_id);
-
-        $this->validate($request, [
-            'disease_id.*' => 'required|integer'
-        ]);
-
-        $par = $request->disease_id;
-        //  dd($par);
-
-        $result = DB::table('medicines')
-                ->select('medicines.medicine_name', 'medicines.find_at_pharmacy')
-                ->join('medicine_rules', 'medicines.id', '=',  'medicine_rules.medicine_id')
-                ->join('medicine_rule_details', 'medicine_rule_details.medicine_rule_id', '=', 'medicine_rules.id')
-                ->whereIn('medicine_rule_details.disease_id', $par)
-                ->groupBy('medicines.medicine_name', 'medicines.find_at_pharmacy')
-                ->get();
-
         $items = Consultation::with([
             'consultation_detail', 'user' 
         ])->findOrFail($id);
@@ -110,7 +94,29 @@ class GrievenceController extends Controller
         $b_pressure = $items['blood_pressure'];
         $b_weight = $items['body_weight'];
 
-        \dd($items, $age, $b_pressure, $b_weight);
+        $par = $request->disease_id;
+        // dd($par);
+
+        
+
+        $result = DB::table('medicines')
+                ->select('medicines.medicine_name', 'medicines.find_at_pharmacy')
+                ->join('medicine_rules', 'medicines.id', '=',  'medicine_rules.medicine_id')
+                ->join('medicine_rule_details', 'medicine_rule_details.medicine_rule_id', '=', 'medicine_rules.id')
+                ->where('medicine_rule_details.disease_id', $par)
+                ->groupBy('medicines.medicine_name', 'medicines.find_at_pharmacy')
+                ->get();
+
+        
+        // \dd($items, $age, $b_pressure, $b_weight);
+
+        $r_dosage = DB::table('dosages')
+                    ->select('dosages.dosage, blood_pressures.sistolic_start, blood_pressures.sistolic_end')
+                    ->join('dosage_details', 'dosage_details.dosages_id', '=', 'dosages.id')
+                    ->join('ages', 'ages.id', '=', 'dosage_details.ages_id')
+                    ->join('weights', 'weights.id', 'dosage.details.weights_id')
+                    ->join('blood_pressure', 'blood_pressure.id', '=', 'dosage_details.blood_pressure_id')
+                    ->where('dosages.medicine_id', '=', 6);
 
         return \view('pages.grievence-result', [
             'result' => $result, 
@@ -120,7 +126,6 @@ class GrievenceController extends Controller
     }
 
     public function record($id) {
-        // \dd($items);
         $items = Consultation::with([
             'user', 'consultation_detail'
         ])->where('user_id', $id)->get();

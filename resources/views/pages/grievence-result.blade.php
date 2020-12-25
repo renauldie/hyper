@@ -41,7 +41,7 @@
         </div>
       </div>
       <div class="card-body container">
-        <h4 class="mt-2">Medicine</h4>
+        <h4 class="mt-2">Recomended Medicine</h4>
         <div class="table-responsive text-center p-5">
           <table class="table" style="border: none;">
             <thead>
@@ -50,13 +50,23 @@
             </thead>
             <tbody>
               @foreach ($result as $result => $main)
-              <td>{{ $main -> medicine_name }}</td>
-              @if ($main -> find_at_pharmacy = 1)
+              <tr>
+                <td>{{ $main -> medicine_name }}</td>
+                @if ($main -> find_at_pharmacy = 1)
+                <td style="color: green">Yes</td>
+                @else
+                <td>No</td>
+                @endif
+              </tr>
+              @endforeach
+              {{-- <tr>
+                <td>{{ $result -> medicine_name }}</td>
+              @if ($result -> find_at_pharmacy = 1)
               <td style="color: green">Yes</td>
               @else
               <td>No</td>
               @endif
-              @endforeach
+              </tr> --}}
             </tbody>
           </table>
         </div>
@@ -64,6 +74,7 @@
 
       <div class="card-body container">
         <h4 class="mt-2">Medicine Dosage</h4>
+
       </div>
     </div>
   </div>
