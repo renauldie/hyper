@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Admin\BloodPressure;
 use App\Models\Admin\Disease;
 use App\Models\Admin\Medicine;
+use App\Models\Admin\Age;
+use App\Models\Admin\Weight;
 use App\Models\Consultation;
 use App\Models\ConsultationDetail;
 
@@ -86,22 +88,6 @@ class GrievenceController extends Controller
 
     public function checkResult(Request $request, $id) {
         // dd($request->disease_id);
-
-        $this->validate($request, [
-            'disease_id.*' => 'required|integer'
-        ]);
-
-        $par = $request->disease_id;
-        //  dd($par);
-
-        $result = DB::table('medicines')
-                ->select('medicines.medicine_name', 'medicines.find_at_pharmacy')
-                ->join('medicine_rules', 'medicines.id', '=',  'medicine_rules.medicine_id')
-                ->join('medicine_rule_details', 'medicine_rule_details.medicine_rule_id', '=', 'medicine_rules.id')
-                ->whereIn('medicine_rule_details.disease_id', $par)
-                ->groupBy('medicines.medicine_name', 'medicines.find_at_pharmacy')
-                ->get();
-
         $items = Consultation::with([
             'consultation_detail', 'user' 
         ])->findOrFail($id);
@@ -110,17 +96,72 @@ class GrievenceController extends Controller
         $b_pressure = $items['blood_pressure'];
         $b_weight = $items['body_weight'];
 
-        \dd($items, $age, $b_pressure, $b_weight);
+        $par = $request->disease_id;
+
+        $result = DB::table('medicines')
+                ->select('medicines.medicine_name', 'medicines.find_at_pharmacy', 'medicines.id')
+                ->join('medicine_rules', 'medicines.id', '=',  'medicine_rules.medicine_id')
+                ->join('medicine_rule_details', 'medicine_rule_details.medicine_rule_id', '=', 'medicine_rules.id')
+                ->whereIn('medicine_rule_details.disease_id', $par)
+                ->groupBy('medicines.id')
+                ->get();
+        
+        // dd($age, $b_pressure, $b_weight);
 
         return \view('pages.grievence-result', [
             'result' => $result, 
             'items' => $items
-        ]);
+        ]);   
+    }
+
+    public function checkDosage(Request $request, $id) {
+        $items = Consultation::with([
+            'consultation_detail', 'user' 
+        ])->findOrFail($id);
+
+        $age = $items['ages'];
+        $b_pressure = $items['blood_pressure'];
+        $b_weight = $items['body_weight'];
+        $par = $request -> medicine_id;
+
+        $age_id = Age::all()
+            ->where('start_age', '<=', $age)
+            ->where('end_age', '>=', $age)
+            ->first();
+
+        $weight_id = Weight::all()
+            ->where('start_weight', '<=', $b_weight)
+            ->where('end_weight', '>=', $b_weight)
+            ->first();
+
+        $bp_id = BloodPressure::all()
+            ->where('sistolic_start', '<=', $b_pressure)
+            ->where('sistolic_end', '>=', $b_pressure)
+            ->first();
+
+        $dosages = DB::table('dosages')
+            ->select('dosages.dosage', 'medicines.medicine_name')
+            ->join('medicines', 'medicines.id', 'dosages.medicine_id')
+            ->join('medicine_rules', 'medicine_rules.medicine_id',   'medicines.id')
+            ->join('dosage_details', 'dosage_details.dosages_id', 'dosages.id')
+            ->groupBy('dosages.dosage', 'medicines.medicine_name')
+            ->whereIn('dosages.medicine_id', $par)
+            ->where('dosage_details.ages_id', $age_id->id)
+            ->where('dosage_details.weights_id', $weight_id->id)
+            ->where('dosage_details.blood_pressure_id', $bp_id->id)
+            ->get();
+
+            \dd($par, $age_id->id, $weight_id->id, $bp_id->id, $items->id);
+
         
+
+        return view('pages.grievence-dosage', [
+            'dosages' => $dosages,
+            'items' =>$items
+        ]);
     }
 
     public function record($id) {
-        // \dd($items);
         $items = Consultation::with([
             'user', 'consultation_detail'
         ])->where('user_id', $id)->get();
