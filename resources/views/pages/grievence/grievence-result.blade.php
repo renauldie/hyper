@@ -45,7 +45,7 @@
             </div>
 
             <div class="container-fluid col-6 text-center mb-4">
-              <button type="submit" class="btn btn-block btn-primary btn-sm mt-5">Show Dosage</button>
+              <button type="submit" class="btn btn-block btn-primary btn-sm mt-5">Detail Medicine</button>
             </div>
           </form>
         </div>
