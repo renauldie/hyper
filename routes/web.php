@@ -55,6 +55,9 @@ Route::get('consultation/consultation-disease/delete/{id}', [GrievenceController
 Route::get('consultation/consultation-disease/check/{id}', [GrievenceController::class, 'checkResult'])
     ->name('disease-result');
 
+Route::get('consultation/consultation-disease/dosage/{id}', [GrievenceController::class, 'checkDosage'])
+    ->name('dosage-result');
+
 Route::get('consultation-record/{id}', [GrievenceController::class, 'record'])
     ->name('consultation-record');
 // Obat gallery
