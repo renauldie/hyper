@@ -13,7 +13,7 @@ class CreateRecordDetailTable extends Migration
      */
     public function up()
     {
-        Schema::create('consultation_record_detail', function (Blueprint $table) {
+        Schema::create('consultation_record_details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('consultation_record_id');
             $table->integer('medicine_id');
@@ -30,6 +30,6 @@ class CreateRecordDetailTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('consultation_record_detail');
+        Schema::dropIfExists('consultation_record_details');
     }
 }

@@ -69,11 +69,6 @@ class GrievenceController extends Controller
         ])->findOrFail($id);
 
         $diseases = Disease::all()->sortBy('id');
-        
-        // $details = DB::table('diseases')
-        //             ->join('consultation_details', 'diseases.id', '=', 'consultation_details.diseases_id')
-        //             ->where('consultation_details.cosultations_id', '=', $id)
-        //             ->get();
 
         $dets = ConsultationDetail::with(
             'diseases', 'consultation'
@@ -154,6 +149,8 @@ class GrievenceController extends Controller
             ->where('dosage_details.weights_id', $weight_id->id)
             ->where('dosage_details.blood_pressure_id', $bp_id->id)
             ->get();
+
+        
 
             // \dd($par, $age_id->id, $weight_id->id, $bp_id->id, $items->id);
 
