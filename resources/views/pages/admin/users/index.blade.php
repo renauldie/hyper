@@ -17,6 +17,8 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Data Table</h4>
+          <a href="{{ route('user-export') }}" target="_blank" class="btn btn-primary btn-sm float-right">Print All
+            User</a>
           <div class="table-responsive">
             <table class="table table-striped table-bordered zero-configuration">
               <thead>

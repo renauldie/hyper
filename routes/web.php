@@ -100,5 +100,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 Route::get('/user-consultation/export_excel', [UserConsultationController::class, 'export_excel'])
 ->name('consultation-export');
 
+Route::get('/user/export_excel', [UserListController::class, 'export_pdf'])
+->name('user-export');
+
+Route::get('/medicine/export_excel', [MedicineController::class, 'export_pdf'])
+->name('medicine-export');
+
 Route::get('/ususer-consultationer/export_pdf/{cons}', [GrievenceController::class, 'export_pdf'])
 ->name('consultation-end');

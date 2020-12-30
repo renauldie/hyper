@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\adminMedicineExport;
+
 use App\Http\Requests\Admin\MedicineRequest;
 use App\Models\Admin\Medicine;
 use App\Models\Admin\MedicineGallery;
-use App\Models\Admin\ MedicineRuleDetail;
+use App\Models\Admin\MedicineRuleDetail;
 
 class MedicineController extends Controller
 {
@@ -23,6 +26,10 @@ class MedicineController extends Controller
         return \view('pages.admin.medicine.index',[
             'items' => $items
         ]);
+    }
+
+    public function export_pdf(){
+        return Excel::download(new adminMedicineExport, 'medicine-list.xlsx');
     }
 
     /**
