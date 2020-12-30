@@ -20,6 +20,9 @@
           <a href="{{ route('medicine.create')}}" class="btn btn-primary mr-4 float-right">
             Add Medication
           </a>
+          <a href="{{ route('medicine-export')}}" target="_blank" class="btn btn-info mr-4 float-right">
+            Export Medicine
+          </a>
           <div class="table-responsive">
             <table class="table table-striped table-bordered zero-configuration">
               <thead>

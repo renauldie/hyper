@@ -16,16 +16,11 @@ class adminUserConsultationExport implements FromCollection
     */
     public function collection()
     {
-        $items = Consultation::with([
-            'user'
-        ])->get();
-
         $data = DB::table('consultations')
             ->select('users.name', 'consultations.blood_pressure', 'consultations.body_weight', 'consultations.ages')
             ->join('users', 'users.id', 'consultations.user_id')
             ->get();
-                
-        // return User::all();
+            
         return $data;
     }
 }
