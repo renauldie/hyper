@@ -93,4 +93,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::resource('user-list', UserListController::class);
     
     Route::resource('user-consultation', UserConsultationController::class);
+
 });
+
+//to download file admin
+Route::get('/user-consultation/export_excel', [UserConsultationController::class, 'export_excel'])
+->name('consultation-export');
+
+Route::get('/ususer-consultationer/export_pdf/{cons}', [GrievenceController::class, 'export_pdf'])
+->name('consultation-end');

@@ -51,7 +51,6 @@
               <div class="row pl-4">
                 <col-md-4 class="col-lg-10">
                   <p>{{ $det->diseases->name}}</p>
-                  <input value="{{ $det->diseases->id}}" name="medicine_id[]" readonly hidden>
                 </col-md-4>
               </div>
               @empty
@@ -95,8 +94,6 @@
                 @endforeach
               </tbody>
             </table>
-            <a href="#" class="btn btn-primary btn-sm btn-block">Print
-              Record</a>
           </div>
         </div>
       </div>

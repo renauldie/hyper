@@ -16,6 +16,8 @@ use App\Models\ConsultationDetail;
 
 use App\Http\Requests\GrievenceRequest;
 use App\Http\Requests\GrievenceDetailRequest;
+
+use PDF;
 class GrievenceController extends Controller
 {
     /**
@@ -118,6 +120,7 @@ class GrievenceController extends Controller
             'diseases', 'consultation'
         )->where('cosultations_id', $id)->get();
 
+        $cons = $id;
         $age = $items['ages'];
         $b_pressure = $items['blood_pressure'];
         $b_weight = $items['body_weight'];
@@ -150,15 +153,20 @@ class GrievenceController extends Controller
             ->where('dosage_details.blood_pressure_id', $bp_id->id)
             ->get();
 
-        
-
             // \dd($par, $age_id->id, $weight_id->id, $bp_id->id, $items->id);
 
         return view('pages.grievence.grievence-dosage', [
             'dosages' => $dosages,
             'items' =>$items,
-            'dets' => $dets
+            'dets' => $dets,
+            'cons' => $cons
         ]);
+    }
+
+    public function export_pdf(Request $request, $id) {
+
+        $pdf = PDF::loadView('pages.grievence.grievence_pdf');
+        return $pdf->download('consultation.pdf');
     }
 
     public function record($id) {

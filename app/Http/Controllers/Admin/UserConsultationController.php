@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\adminUserConsultationExport;
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 
 use App\Models\Consultation;
@@ -24,6 +27,11 @@ class UserConsultationController extends Controller
             'items' => $items,
         ]);
     }
+
+    public function export_excel()
+	{
+		return Excel::download(new adminUserConsultationExport, 'consultation-record.xlsx');
+	}
 
     /**
      * Show the form for creating a new resource.
