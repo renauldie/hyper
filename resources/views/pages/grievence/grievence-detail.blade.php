@@ -14,33 +14,15 @@
 <section class="about_us padding_top">
   <div class="container">
     <div class="card">
-      <div class="card-header">
-        <h4 class="mt-4">General Hypertension Information</h4>
+      <div class="card-header text-center">
+        <h4 class="mt-4">Choose Disease That You Have</h4>
       </div>
       <div class="card-body container">
-
-        <div class="table-responsive text-center container">
-          <table class="table" style="border: none;">
-            <thead>
-              <th>Name</th>
-              <th>Age</th>
-              <th>Blood Pressure</th>
-              <th>Body Weight</th>
-            </thead>
-            <tbody>
-              <td>{{ $items->user->name}}</td>
-              <td>{{ $items->ages }} thn</td>
-              <td>{{ $items->blood_pressure }} mmHg</td>
-              <td>{{ $items->body_weight }} Kg</td>
-            </tbody>
-          </table>
-        </div>
-
         <div class="container">
           <div class="row">
             <div class="col-md-6 col-xl-6">
               <h4 class="mt-4">Selected Disease</h4>
-              @foreach ($dets as $det)
+              @forelse ($dets as $det)
               <div class="row">
                 <col-md-4 class="col-lg-10">
                   <p>{{ $det->diseases->name}}</p>
@@ -51,7 +33,13 @@
                   </a>
                 </col-md-2>
               </div>
-              @endforeach
+              @empty
+              <div class="row">
+                <col-md-4 class="col-lg-10">
+                  <p>Choose Normal First</p>
+                </col-md-4>
+              </div>
+              @endforelse
             </div>
 
             <div class="col-md-6 col-xl-6">

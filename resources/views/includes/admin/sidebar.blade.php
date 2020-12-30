@@ -65,7 +65,7 @@
         </a>
       </li>
       <li>
-        <a href="#" aria-expanded="false">
+        <a href="{{ route('user-consultation.index') }}" aria-expanded="false">
           <i class="fas fa-stethoscope"></i><span class="nav-text">User Consultations</span>
         </a>
       </li>

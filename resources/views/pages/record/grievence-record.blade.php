@@ -22,6 +22,7 @@
           <table class="table" style="border: none;">
             <thead>
               <th>Number</th>
+              <th>Date</th>
               <th>Name</th>
               <th>Age</th>
               <th>Blood Pressure</th>
@@ -31,23 +32,16 @@
             <tbody>
               @foreach ($items as $item => $main)
               <tr>
-                <td>{{ ++$item}}</td>
+                <td>{{ ++$item }}</td>
+                <td>{{ $main -> created_at -> format('Y-m-d') }}</td>
                 <td>{{ $main -> user -> name }}</td>
                 <td>{{ $main -> ages }}</td>
                 <td>{{ $main -> blood_pressure }}</td>
                 <td>{{ $main -> body_weight }}</td>
                 <td style="width: 150px">
-                  <form action="#" method="POST" class="d-inline">
-                    @csrf
-                    @method('delete')
-                    <button class="btn btn-danger btn-sm">
-                      <i class="fa fa-trash"></i>
-                    </button>
-                  </form>
-                  <a href="#" class="btn btn-sm btn-primary">
+                  <a href="{{ route('choose-disease', $main->id) }}" class="btn btn-sm btn-primary">
                     <i class="fas fa-info-circle"></i>
                   </a>
-
                 </td>
               </tr>
               @endforeach

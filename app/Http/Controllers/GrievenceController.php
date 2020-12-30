@@ -16,6 +16,8 @@ use App\Models\ConsultationDetail;
 
 use App\Http\Requests\GrievenceRequest;
 use App\Http\Requests\GrievenceDetailRequest;
+
+use PDF;
 class GrievenceController extends Controller
 {
     /**
@@ -35,7 +37,7 @@ class GrievenceController extends Controller
      */
     public function index()
     {
-        return view('pages.grievence');
+        return view('pages.grievence.grievence');
     }
 
     public function adminshow() 
@@ -69,17 +71,12 @@ class GrievenceController extends Controller
         ])->findOrFail($id);
 
         $diseases = Disease::all()->sortBy('id');
-        
-        // $details = DB::table('diseases')
-        //             ->join('consultation_details', 'diseases.id', '=', 'consultation_details.diseases_id')
-        //             ->where('consultation_details.cosultations_id', '=', $id)
-        //             ->get();
 
         $dets = ConsultationDetail::with(
             'diseases', 'consultation'
         )->where('cosultations_id', $id)->get();
         
-        return \view('pages.grievence-detail', [
+        return \view('pages.grievence.grievence-detail', [
             'items' => $items, 
             'diseases' => $diseases,
             'dets' => $dets
@@ -108,7 +105,7 @@ class GrievenceController extends Controller
         
         // dd($age, $b_pressure, $b_weight);
 
-        return \view('pages.grievence-result', [
+        return \view('pages.grievence.grievence-result', [
             'result' => $result, 
             'items' => $items
         ]);   
@@ -119,6 +116,11 @@ class GrievenceController extends Controller
             'consultation_detail', 'user' 
         ])->findOrFail($id);
 
+        $dets = ConsultationDetail::with(
+            'diseases', 'consultation'
+        )->where('cosultations_id', $id)->get();
+
+        $cons = $id;
         $age = $items['ages'];
         $b_pressure = $items['blood_pressure'];
         $b_weight = $items['body_weight'];
@@ -140,25 +142,31 @@ class GrievenceController extends Controller
             ->first();
 
         $dosages = DB::table('dosages')
-            ->select('dosages.dosage', 'medicines.medicine_name')
+            ->select('dosages.dosage', 'medicines.medicine_name', 'medicines.find_at_pharmacy')
             ->join('medicines', 'medicines.id', 'dosages.medicine_id')
             ->join('medicine_rules', 'medicine_rules.medicine_id',   'medicines.id')
             ->join('dosage_details', 'dosage_details.dosages_id', 'dosages.id')
-            ->groupBy('dosages.dosage', 'medicines.medicine_name')
+            ->groupBy('dosages.dosage', 'medicines.medicine_name', 'medicines.find_at_pharmacy')
             ->whereIn('dosages.medicine_id', $par)
             ->where('dosage_details.ages_id', $age_id->id)
             ->where('dosage_details.weights_id', $weight_id->id)
             ->where('dosage_details.blood_pressure_id', $bp_id->id)
             ->get();
 
-            \dd($par, $age_id->id, $weight_id->id, $bp_id->id, $items->id);
+            // \dd($par, $age_id->id, $weight_id->id, $bp_id->id, $items->id);
 
-        
-
-        return view('pages.grievence-dosage', [
+        return view('pages.grievence.grievence-dosage', [
             'dosages' => $dosages,
-            'items' =>$items
+            'items' =>$items,
+            'dets' => $dets,
+            'cons' => $cons
         ]);
+    }
+
+    public function export_pdf(Request $request, $id) {
+
+        $pdf = PDF::loadView('pages.grievence.grievence_pdf');
+        return $pdf->download('consultation.pdf');
     }
 
     public function record($id) {
@@ -170,9 +178,9 @@ class GrievenceController extends Controller
         //     'consultation_detail'
         // ])->where('consultation');
 
-    return view('pages.record.grievence-record', [
-        'items' =>$items
-    ]);
+        return view('pages.record.grievence-record', [
+            'items' =>$items
+        ]);
 
     }
 }

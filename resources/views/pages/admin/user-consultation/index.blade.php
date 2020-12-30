@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="row pweight-titles mx-0">
+<div class="row page-titles mx-0">
   <div class="col p-md-0">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-      <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+      <li class="breadcrumb-item active"><a href="javascript:void(0)">User Consultation</a></li>
     </ol>
   </div>
 </div>
@@ -17,22 +17,29 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Data Table</h4>
-          <a href="{{ route('weight.create')}}" class="btn btn-primary mr-4 float-right">
-            Add Weight
-          </a>
+          <a href="{{ route('consultation-export') }}" class="btn btn-info btn-md float-right" target="_blank">Export
+            Excel</a>
           <div class="table-responsive">
             <table class="table table-striped table-bordered zero-configuration">
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>weight Range</th>
+                  <th>User</th>
+                  <th>Blood Pressure</th>
+                  <th>Body Weight</th>
+                  <th>Age</th>
+                  <th>Date</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tfoot>
                 <tr>
                   <th>No</th>
-                  <th>weight Range</th>
+                  <th>User</th>
+                  <th>Blood Pressure</th>
+                  <th>Body Weight</th>
+                  <th>Age</th>
+                  <th>Date</th>
                   <th>Action</th>
                 </tr>
               </tfoot>
@@ -40,18 +47,17 @@
                 @foreach ($items as $item => $main)
                 <tr>
                   <td style="width: 50px">{{ ++$item }}</td>
-                  <td>{{ $main -> start_weight }} - {{ $main->end_weight }}</td>
-                  <td style="width: 150px">
-                    <a href="{{ route('weight.edit', $main->id) }}" class="btn btn-info btn-sm">
-                      <i class="icon-note menu-icon"></i>
-                    </a>
-                    <form action="{{ route('weight.destroy', $main->id) }}" method="POST" class="d-inline">
-                      @csrf
-                      @method('delete')
-                      <button class="btn btn-danger btn-sm">
-                        <i class="fa fa-trash"></i>
-                      </button>
-                    </form>
+                  <td>{{ $main -> user -> name }}</td>
+                  <td>{{ $main -> blood_pressure }} MmHg</td>
+                  <td>{{ $main -> body_weight }} Kg</td>
+                  <td>{{ $main -> ages }} Y.O</td>
+                  <td>{{ $main -> created_at -> format('Y-m-d') }}</td>
+                  <td>
+                    <div class="text-center">
+                      <a href="#" class="btn btn-sm btn-primary">
+                        <i class="fas fa-info"></i>
+                      </a>
+                    </div>
                   </td>
                 </tr>
                 @endforeach

@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\UserListController;
 use App\Http\Controllers\Admin\AgeController;
 use App\Http\Controllers\Admin\WeightController;
 use App\Http\Controllers\Admin\DosageController;
+use App\Http\Controllers\Admin\UserConsultationController;
 use App\Http\Controllers\Admin\DosageDetailController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BlogController;
@@ -60,6 +61,7 @@ Route::get('consultation/consultation-disease/dosage/{id}', [GrievenceController
 
 Route::get('consultation-record/{id}', [GrievenceController::class, 'record'])
     ->name('consultation-record');
+    
 // Obat gallery
 Route::get('blog', [BlogController::class, 'index'])
     ->name('blog');
@@ -68,26 +70,35 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/', [DashboardController::class, 'index'])
         ->name('dashboard');
         
-    Route::resource('user-list', UserListController::class);
-        
     Route::resource('blood-pressure', BloodPressureController::class);
-
+    
     Route::resource('disease', DiseaseController::class);
-
+    
     Route::resource('medicine', MedicineController::class);
     
     Route::resource('medicine-gallery', MedicineGalleryController::class);
-
+    
     Route::resource('medicine-rule', MedicineRuleController::class);
-
+    
     Route::resource('medicine-rule-detail', MedicineRuleDetailController::class);
     
     Route::resource('age', AgeController::class);
     
     Route::resource('weight', WeightController::class);
-
+    
     Route::resource('dosage-list', DosageController::class);
-
+    
     Route::resource('dosage-detail', DosageDetailController::class);
+    
+    Route::resource('user-list', UserListController::class);
+    
+    Route::resource('user-consultation', UserConsultationController::class);
 
 });
+
+//to download file admin
+Route::get('/user-consultation/export_excel', [UserConsultationController::class, 'export_excel'])
+->name('consultation-export');
+
+Route::get('/ususer-consultationer/export_pdf/{cons}', [GrievenceController::class, 'export_pdf'])
+->name('consultation-end');
