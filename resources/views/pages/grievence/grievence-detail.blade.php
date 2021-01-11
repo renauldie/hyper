@@ -89,8 +89,22 @@
         </form>
       </div>
     </div>
-    <div class="card">
-
+    <div class="card mt-3">
+      <div class="card-header text-center">
+        <h4 class="mt-4">Disease Detail</h4>
+        <table class="table table-respondsive mt-3 p-5">
+          <tr>
+            <th style="width: 400px">Name Disease</th>
+            <th>Disease Description</th>
+          </tr>
+          @foreach ($diseases as $disease)
+          <tr>
+            <td class="text-left">{{ $disease->name }}</td>
+            <td>{{ $disease->description }}</td>
+          </tr>
+          @endforeach
+        </table>
+      </div>
     </div>
   </div>
   </div>

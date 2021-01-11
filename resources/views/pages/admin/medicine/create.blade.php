@@ -41,10 +41,10 @@
                 required>
             </div>
             <div class="form-group">
-              <label for="" class="font-weight-bold">Max Usage</label> <br>
-              <label for="" class="font-weight-light">example: twice a day</label>
-              <input type="text" class="form-control input-default" placeholder="Input Default" name="max_usage"
-                required>
+              <label for="" class="font-weight-bold">Max Usage/Mg</label> <br>
+              <label for="" class="font-weight-light">example: 10</label>
+              <input type="number" min="3" class="form-control input-default" placeholder="Input Default"
+                name="max_usage" required>
             </div>
             <div class="form-group">
               <label for="" class="font-weight-bold">Can be Fined at Pharmacy</label>
